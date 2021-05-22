@@ -5,6 +5,9 @@ Clear-Host
 $Open = 'True'
 $Alert = 'False'
 $Warning = 0
+
+$ip = ((ipconfig | findstr [0-9].\.)[0]).Split()[-1]
+$mask = '255.255.255.0'
 $MainGateway = 'Your Main Gateway'
 $SpareGateway = 'Your Spare Gateway'
 
@@ -15,23 +18,23 @@ while ($Open -eq 'True') {
     Write-Output "Проверка доступности интернета"
     while ($Alert -eq 'False') {
         
-        $InternetAccesss = Test-Connection -Count 1 -computer 8.8.8.8 -quiet
+        $InternetAccess = Test-Connection -Count 1 -computer google.com -quiet
         Wait-Event -Timeout 1
 
         # Если потерян пакет заходим в цикл и добавляем 1 Warning
-        if ($InternetAccesss -match 'False') {
+        if ($InternetAccess -match 'False') {
             $Warning = $Warning + 1
             Write-Output "Потеряно пакетов $Warning"
 
             # Считаем кол-во потерянных пакетов
             while ($Warning -ne 0) {
-                $InternetAccess = Test-Connection -Count 1 -computer 8.8.8.8 -quiet
+                $InternetAccess = Test-Connection -Count 1 -computer google.com -quiet
                 Wait-Event -Timeout 1
 
                 # Если пакет потерян добавляем 1 Warning
                 if ($InternetAccess -match 'False') {
                     $Warning = $Warning + 1
-                    Write-Output "Потеряно пакетов $Warning "
+                    Write-Output "Потеряно пакетов $Warning"
 
                     # Если потеряно 10 пакетов, то выходим из цикла проверки доступа и меняем шлюз
                     if ($Warning -eq 10) {
@@ -54,7 +57,7 @@ while ($Open -eq 'True') {
 
      # Если шлюз равен (Main), то делаем (Spare)
      if ($EthernetGate.NextHop -eq $MainGateway) {
-         # Меняем шлюз на другой
+         netsh interface ip set address "Ethernet" static $ip $mask $SpareGateway
          Write-Output("Switch gateway on $SpareGateway")
          Wait-Event -Timeout 30
          # Отправка оповещения на почту?
@@ -63,15 +66,15 @@ while ($Open -eq 'True') {
 
      # Если шлюз равен (Spare), то делаем (Main)
      elseif ($EthernetGate.NextHop -eq $SpareGateway) {
-          # Меняем шлюз на другой
+          netsh interface ip set address "Ethernet" static $ip $mask $MainGateway
           Write-Output("Switch gateway on $MainGateway")
           Wait-Event -Timeout 30
           # Отправка оповещения на почту?
           $Alert = 'False'
         }
 
-        #Иначе указан неверный шлюз
-        else {
+     #Иначе указан неверный шлюз
+     else {
         Write-Output("Invalid gateway specified")
         Wait-Event -Timeout 30
         # Отправка оповещения на почту?
