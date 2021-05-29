@@ -43,7 +43,19 @@ print("Result: ", find_index(sentence, number))
 
 # 4) Write a Python program to reverse a tuple
 print("Python program to reverse a tuple")
+some_tuple = (1, 2, 3, 4, 5, 6)
+some_tuple = list(some_tuple)
+some_tuple.reverse()
+some_tuple = tuple(some_tuple)
+print(some_tuple)
 
 
 # 5) Write a Python program to remove an item from a tuple
 print("Python program to remove an item from a tuple")
+some_tuple = (1, 2, 3, 4, 5, 6)
+print(some_tuple)
+number = int(input())
+some_tuple = list(some_tuple)
+some_tuple.remove(number)
+some_tuple = tuple(some_tuple)
+print(some_tuple)
