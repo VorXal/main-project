@@ -44,6 +44,13 @@ some_list = [1, 5, 3, 6]
 yet_some_list = [1, 5, 3, 2, 5, 6]
 print(list_append(some_list, yet_some_list))
 
+# Или 2 вариант
+
+some_list = [1, 5, 3, 6]
+yet_some_list = [1, 5, 3, 2, 5, 6]
+some_list.extend(yet_some_list)
+print(some_list)
+
 
 # 4) Write a Python program to compute the difference between two lists.
 #               Sample data: ["red", "orange", "green", "blue", "white"], ["black", "yellow", "green", "blue"]
@@ -83,3 +90,24 @@ search_difference(Color1, Color2)
 
 # print("Color1-Color2: ", Color1)
 # print("Color2-Color1: ", Color2)
+
+
+# 5) Write a Python program to move all zero digits to end of a given list of numbers.
+#               Expected output:
+#                             Original list:
+#                             [3, 4, 0, 0, 0, 6, 2, 0, 6, 7, 6, 0, 0, 0, 9, 10, 7, 4, 4, 5, 3, 0, 0, 2, 9, 7, 1]
+#                             Move all zero digits to end of the said list of numbers:
+#                             [3, 4, 6, 2, 6, 7, 6, 9, 10, 7, 4, 4, 5, 3, 2, 9, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+print("Python program to move all zero digits to end of a given list of numbers")
+
+
+def move_zero(array):
+    for i in array:
+        if i == 0:
+            array.remove(i)
+            array.append(i)
+    return array
+
+
+some_list = [3, 4, 0, 0, 0, 6, 2, 0, 6, 7, 6, 0, 0, 0, 9, 10, 7, 4, 4, 5, 3, 0, 0, 2, 9, 7, 1]
+print(move_zero(some_list))
