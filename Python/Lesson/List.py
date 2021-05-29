@@ -43,3 +43,43 @@ def list_append(first_list, second_list):
 some_list = [1, 5, 3, 6]
 yet_some_list = [1, 5, 3, 2, 5, 6]
 print(list_append(some_list, yet_some_list))
+
+
+# 4) Write a Python program to compute the difference between two lists.
+#               Sample data: ["red", "orange", "green", "blue", "white"], ["black", "yellow", "green", "blue"]
+#               Expected Output:
+#                             Color1-Color2: ['white', 'orange', 'red']
+#                             Color2-Color1: ['black', 'yellow']
+print("Python program to compute the difference between two lists\n")
+
+
+def search_difference(first_list, second_list):
+    buffer = []
+    for i in second_list:
+        buffer.append(i)
+
+    for i in first_list:
+        index_first = first_list.index(i)
+        for j in second_list:
+            index_second = second_list.index(j)
+            if first_list[index_first] == second_list[index_second]:
+                first_list.remove(first_list[index_first])
+                buffer.remove(second_list[index_second])
+
+    first_list.reverse()
+
+    print("Color1-Color2: ", first_list)
+    print("Color2-Color1: ", buffer)
+
+
+#   return first_list, buffer
+
+
+Color1 = ["red", "orange", "green", "blue", "white"]
+Color2 = ["black", "yellow", "green", "blue"]
+
+search_difference(Color1, Color2)
+
+
+# print("Color1-Color2: ", Color1)
+# print("Color2-Color1: ", Color2)
