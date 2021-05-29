@@ -61,9 +61,7 @@ print("Python program to compute the difference between two lists\n")
 
 
 def search_difference(first_list, second_list):
-    buffer = []
-    for i in second_list:
-        buffer.append(i)
+    buffer = second_list.copy()
 
     for i in first_list:
         index_first = first_list.index(i)
