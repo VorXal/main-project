@@ -32,12 +32,9 @@ print("Python program to append a list to the second list")
 
 
 def list_append(first_list, second_list):
-    new_list = []
-    for i in first_list:
-        new_list.append(i)
     for i in second_list:
-        new_list.append(i)
-    return new_list
+        first_list.append(i)
+    return first_list
 
 
 some_list = [1, 5, 3, 6]
