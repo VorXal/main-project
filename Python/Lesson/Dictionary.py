@@ -9,7 +9,6 @@ def iterate_dictionaries(dictionaries):
 
 elements = {"Au": "Золото", "Fe": "Железо", "H": "Водород", "O": "Кислород"}
 iterate_dictionaries(elements)
-print("\n")
 
 
 # 2) Write a Python script to concatenate following dictionaries to create a new one
@@ -34,7 +33,7 @@ dict3 = {5: 50, 6: 60}
 
 print("Data: ", dict1, dict2, dict3)
 print("Result: ", dict_concatenate(dict1, dict2, dict3))
-print("Data: ", dict1, dict2, dict3, "\n")
+
 
 # 3) Write a Python program to sum all the items in a dictionary
 print("Python program to sum all the items in a dictionary")
@@ -47,6 +46,7 @@ def sum_dictionary_elem(some_dict):
 dictionary = {1: 10, 2: 20, 3: 30, 4: 40, 5: 50, 6: 60}
 print("Data: ", dictionary)
 print("Result: ", sum_dictionary_elem(dictionary), "\n")
+
 
 # 4) Write a Python program to multiply all the items in a dictionary
 print("Python program to multiply all the items in a dictionary")
@@ -61,4 +61,4 @@ def multiply_dictionary_elem(some_dict):
 
 dictionary = {1: 10, 2: 20, 3: 30, 4: 40, 5: 50, 6: 60}
 print("Data: ", dictionary)
-print("Result: ", multiply_dictionary_elem(dictionary), "\n")
+print("Result: ", multiply_dictionary_elem(dictionary))
