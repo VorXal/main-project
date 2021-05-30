@@ -38,6 +38,28 @@ check_list(some_list, number)
 print("Строки")
 
 
+def delete_duplicate(string):
+    dictionary = {}
+    buffer = string.split()
+    # Заполняем словарь
+    for i in buffer:
+        if i in dictionary:
+            dictionary[i] = 'True'
+        else:
+            dictionary[i] = 'False'
+    # Если слово встречается больше 2 раз удаляем из словаря
+    result = dictionary.copy()
+    for i in dictionary:
+        if dictionary[i] == 'True':
+            del result[i]
+    return ' '.join(list(result))
+
+
+some_string = "This text help me or text text you help"
+print("Data: ", some_string)
+print("Result: ", delete_duplicate(some_string))
+
+
 # Задание 4 Факториал
 # Написать функцию нахождения факториала числа n
 print("Факториал")
@@ -52,8 +74,3 @@ def factorial(num):
 
 number = 7
 print(factorial(number))
-
-# Задание 5. Правильная скобочная последовательность
-# Дана строка состоящая из скобок “{},(),[]”, определить является ли данная строка
-# правильно скобочной последовательность. Например (()) – псп, а ((() нет
-print("\nПравильная скобочная последовательность")
