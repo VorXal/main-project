@@ -53,3 +53,17 @@ some_set = {1, 3, 5}
 print("Data: ", some_set)
 print("Result: ", set_intersection(some_set))
 print("Data: ", some_set)
+
+
+# 5) Write a Python program to remove the intersection of a 2nd set from the 1st set
+print("Python program to remove the intersection of a 2nd set from the 1st set")
+
+
+def remove_intersection(first_set, second_set):
+    return first_set.difference(second_set)
+
+
+some_set = {1, 3, 5, 6, 7, 8}
+yet_some_set = {1, 3, 2, 4, 19, 8}
+print("Data: ", some_set, "and", yet_some_set)
+print("Result: ", remove_intersection(some_set, yet_some_set))
