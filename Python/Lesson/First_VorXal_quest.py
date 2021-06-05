@@ -44,13 +44,13 @@ def delete_duplicate(string):
     # Заполняем словарь
     for i in buffer:
         if i in dictionary:
-            dictionary[i] = 'True'
+            dictionary[i] = True
         else:
-            dictionary[i] = 'False'
+            dictionary[i] = False
     # Если слово встречается больше 2 раз удаляем из словаря
     result = dictionary.copy()
     for i in dictionary:
-        if dictionary[i] == 'True':
+        if dictionary[i] == True:
             del result[i]
     return ' '.join(list(result))
 
