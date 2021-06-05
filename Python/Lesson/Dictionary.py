@@ -18,14 +18,13 @@ iterate_dictionaries(elements)
 #                            dic3={5:50,6:60}
 #              Expected Result : {1: 10, 2: 20, 3: 30, 4: 40, 5: 50, 6: 60}
 print("Python script to concatenate following dictionaries to create a new one")
+import copy
 
-
-def dict_concatenate(first_dict, second_dict, third_dict):
+def dict_concatenate(first_dict, *other_dict):
     result = first_dict.copy()
-    result.update(second_dict)
-    result.update(third_dict)
+    for i in other_dict:
+        result.update(i)
     return result
-
 
 dict1 = {1: 10, 2: 20}
 dict2 = {3: 30, 4: 40}
