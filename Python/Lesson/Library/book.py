@@ -1,12 +1,9 @@
-from author import Author
-
-
 class Book:
 
     # Конструктор для книг
     def __init__(self, name, author, price, edition):
         self.__name = name
-        if type(author) == Author:
+        if type(author) == list:
             self.__author = author
         else:
             print("Author - не является объектом!")
