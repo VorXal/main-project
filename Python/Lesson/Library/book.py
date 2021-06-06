@@ -6,7 +6,7 @@ class Book:
         if type(author) == list:
             self.__author = author
         else:
-            print("Author - не является объектом!")
+            print("Author - не является списком!")
         self.__price = price
         self.__edition = edition
 
