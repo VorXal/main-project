@@ -1,20 +1,20 @@
 class Book:
 
     # Конструктор для книг
-    def __init__(self, name, author, price, edition):
+    def __init__(self, name, price, edition):
         self.__name = name
-        if type(author) == list:
-            self.__author = author
-        else:
-            print("Author - не является списком!")
+        self.__author_list = []
         self.__price = price
         self.__edition = edition
 
     def get_name(self):
         return self.__name
 
-    def get_author(self):
-        return self.__author
+    def append_author(self, author_id, author_list):
+        self.__author_list.append(author_list[author_id])
+
+    def remove_author(self, author_id, author_list):
+        self.__author_list.remove(author_list[author_id])
 
     def get_price(self):
         return self.__price
@@ -30,6 +30,6 @@ class Book:
 
     def output_info(self):
         print("Книга", self.__name)
-        print("Автор", self.__author)
+        print("Автор", self.__author_list)
         print("Цена", self.__price)
         print("Редакция", self.__edition)
