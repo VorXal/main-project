@@ -19,6 +19,9 @@ class quality_control:
         return result
 
     def set_feedback(self, text):
-        self.__text = text
-        # Запись в базу данных
+        if text == "Отмена":
+            return "Ввод комментария отменен"
+        else:
+            self.__text = text
+            # Запись в базу данных
         return "Спасибо за отзыв!"
