@@ -5,6 +5,8 @@ class Ticket:
 
     # Обрезаем сообщение от пользователя
     def __init__(self, message):
+        if type(message) != str:
+            message = str(message)
         if message == "Отмена":
             self.__theme = "Отмена"
         else:
