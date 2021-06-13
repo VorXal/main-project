@@ -1,12 +1,24 @@
 class quality_control:
 
-    def __init__(self, evaluation):
+    def __init__(self, evaluation, text):
         self.__evaluation = evaluation
+        self.__text = text
 
     def save_eval(self):
-        # Запись в базу данных
-
         if self.__evaluation == "1. Серьезные проблемы":
-            return "Просьба связаться с руководителем.\nКонтакты: 8-999-999-99-99"
+            result = "Контакты руководителя: 8-999-999-99-99\nЧто крайне необходимо улучшить?"
+        elif self.__evaluation == "2. Довольно плохо":
+            result = "Что необходимо улучшить?"
+        elif self.__evaluation == "3. Удовлетворительно":
+            result = "Что нужно улучшить?"
+        elif self.__evaluation == "4. Достаточно хорошо":
+            result = "Что можно улучшить?"
         else:
-            return "Благодарим за отзыв, ваша оценка: "+self.__evaluation
+            result = "Спасибо за отзыв!"
+        # Запись в базу данных
+        return result
+
+    def set_feedback(self, text):
+        self.__text = text
+        # Запись в базу данных
+        return "Спасибо за отзыв!"
