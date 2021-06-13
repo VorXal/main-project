@@ -41,9 +41,15 @@ def open_ticket(message):
 # Блок контроля качества, знаю что кривой (иронично?)
 def qa_status(message):
     qa_eval = qa.quality_control(message.text, '')
-    bot.send_message(message.from_user.id, qa_eval.save_eval(), reply_markup=keyboard.menu_markup)
-    if message.text != "5. Все отлично!":
+    bot.send_message(message.from_user.id, qa_eval.save_eval(), reply_markup=keyboard.close_markup)
+    revocation_trigger = ("1. Серьезные проблемы",
+                          "2. Довольно плохо",
+                          "3. Удовлетворительно",
+                          "4. Достаточно хорошо")
+    if message.text in revocation_trigger:
         bot.register_next_step_handler(message, qa_feedback)
+    else:
+        bot.send_message(message.from_user.id, "Чем я еще могу помочь?", reply_markup=keyboard.menu_markup)
 
 
 def qa_feedback(message):
