@@ -19,15 +19,15 @@ class Ticket:
         if self.__theme == "Отмена":
             return "Создание заявки отменено"
         else:
-            if len(self.__message) < 2:
-                error += "Не указана тема сообщения\n"
+            if len(self.__theme) < 3:
+                error += "Ошибка: Тема сообщения меньше 3 символов\n"
                 alert = True
-            if len(self.__message) < 20:
-                error += "Слишком короткое сообщение\n"
+            if len(self.__message) < 12:
+                error += "Ошибка: Тело сообщения меньше 12 символов\n"
                 alert = True
 
             if alert == bool(1):
                 return error
             else:
                 # Отправка письма на почту и возвращение ответа
-                return "Тикет создан!"
+                return "Заявка создана!"
