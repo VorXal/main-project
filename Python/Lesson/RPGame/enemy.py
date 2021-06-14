@@ -4,19 +4,28 @@ import random
 class Enemy:
 
     def __init__(self, hero_level):
-        level = random.randrange(hero_level, hero_level+2)
+        self.__level = random.randrange(hero_level, hero_level+2)
         self.__monsters = ["Демон", "Гоблин", "Скелет", "Суккуб", "Вервольф"]
         self.__grade_monsters = ["Младший ", "Старший ", "Архи-"]
         rand_m = random.randrange(0, len(self.__monsters))
         rand_g = random.randrange(0, len(self.__grade_monsters))
         if rand_g == 1:
-            level += 1
+            self.__level += 3
         elif rand_g == 2:
-            level += 2
+            self.__level += 10
         self.__name = self.__grade_monsters[rand_g] + self.__monsters[rand_m]
-        self.__health = level * random.randrange(50, 100)
-        self.__power = level + random.randrange(1, 10)
+        self.__health = self.__level * random.randrange(50, 100)
+        self.__power = self.__level + random.randrange(20, 40)
         self.__visual = "@"
+
+    def get_name(self):
+        return self.__name
+
+    def get_level(self):
+        return self.__level
+
+    def get_power(self):
+        return self.__power
 
     def set_health(self, damage):
         self.__health -= damage
