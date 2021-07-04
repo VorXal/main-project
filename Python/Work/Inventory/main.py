@@ -16,7 +16,7 @@ def clear_info(info, device_type):
     buffer = info
     array_remove = ["b'Name", "\\r", "\\n", "'", "", "Name",
                     "bBankLabel", "Capacity", "DeviceLocator", "Speed", "P0 CHANNEL", "DIMM 0",
-                    "bModel", "SerialNumber", "\\\\\\\\.\\\\PHYSICALDRIVE"]
+                    "bModel", "SerialNumber", "\\\\\\\\.\\\\PHYSICALDRIVE", "bMaxClock          "]
     for i in array_remove:
         buffer = buffer.replace(i, "")
     buffer = buffer.strip()
@@ -43,7 +43,7 @@ if __name__ == "__main__":
                 video = clear_info(video, "Video: ")
 
                 # Вытаскиваем информацию по CPU
-                cpu = str(subprocess.check_output('wmic cpu get name', shell=True))
+                cpu = str(subprocess.check_output('wmic cpu get name,maxclockspeed', shell=True))
                 cpu = clear_info(cpu, "CPU: ")
 
                 # Вытаскиваем информацию по оперативной памяти
