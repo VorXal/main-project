@@ -14,9 +14,10 @@ def get_mac():
 
 def clear_info(info, device_type):
     buffer = info
-    array_remove = ["b'Name", "\\r", "\\n", "'", "", "Name",
-                    "bBankLabel", "Capacity", "DeviceLocator", "Speed", "P0 CHANNEL", "DIMM 0",
-                    "bModel", "SerialNumber", "\\\\\\\\.\\\\PHYSICALDRIVE", "bMaxClock          "]
+    array_remove = ["b'Name", "\\r", "\\n", "'", "Name",
+                    "Capacity", "Speed", "P0 CHANNEL", "DIMM 0",
+                    "bModel", "SerialNumber", "bMaxClock          ", "Size           ",
+                    "b      ", "Vendor              ", "          ", "       "]
     for i in array_remove:
         buffer = buffer.replace(i, "")
     buffer = buffer.strip()
@@ -35,7 +36,7 @@ if __name__ == "__main__":
                 str_out = "\n______________________________________________________________\nИНФОРМАЦИЯ О ЖЕЛЕЗЕ\n"
 
                 # Вытаскиваем информацию по материнской плате
-                motherboard = str(subprocess.check_output('wmic csproduct get name', shell=True))
+                motherboard = str(subprocess.check_output('wmic csproduct get name,vendor', shell=True))
                 motherboard = clear_info(motherboard, "Motherboard: ")
 
                 # Вытаскиваем информацию по видеокарте
@@ -47,16 +48,16 @@ if __name__ == "__main__":
                 cpu = clear_info(cpu, "CPU: ")
 
                 # Вытаскиваем информацию по оперативной памяти
-                memory = str(subprocess.check_output('wmic MEMORYCHIP get BankLabel,DeviceLocator,Capacity,Speed',
+                memory = str(subprocess.check_output('wmic MEMORYCHIP get Capacity,Speed',
                                                      shell=True))
                 memory = clear_info(memory, "Memory: ")
 
                 # Вытаскиваем информацию по HDD\SSD
-                diskdrive = str(subprocess.check_output('wmic diskdrive get model,name,serialnumber,size', shell=True))
+                diskdrive = str(subprocess.check_output('wmic diskdrive get model,serialnumber,size', shell=True))
                 diskdrive = clear_info(diskdrive, "Drive: ")
 
                 # Инфо о пользователе компьютера
-                user = "\nИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ\nUser: "+str(getpass.getuser())+"\nВладелец ПК: "+user+"\n"
+                user = "ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ\nUser: "+str(getpass.getuser())+"\nВладелец ПК: "+user+"\n"
 
                 # Инфа о сетке, операционной системе и т.д.
                 network = "ОСТАЛЬНОЕ\n"+"IP: "+geo_info[0]+" \nLocation: "+geo_info[1]+"\nMAC-Address: "+get_mac()
