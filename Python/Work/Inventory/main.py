@@ -30,7 +30,7 @@ if __name__ == "__main__":
     while flag:
         try:
             geo_info = gl()
-            user = pg.prompt("Введите ФИО владельца ПК", "Inventory")
+            user = pg.prompt("Введите ФИО владельца ПК", "Ruslab: Inventory")
             if len(user) > 10:
                 inventory = open("Inventory.txt", "a+", encoding="utf-8")
                 str_out = "\n______________________________________________________________\nИНФОРМАЦИЯ О ЖЕЛЕЗЕ\n"
@@ -49,7 +49,7 @@ if __name__ == "__main__":
                 memory = clear_info(memory, "Memory: ")
 
                 # Вытаскиваем информацию по HDD\SSD
-                diskdrive = str(subprocess.check_output('wmic diskdrive get model,name,serialnumber', shell=True))
+                diskdrive = str(subprocess.check_output('wmic diskdrive get model,name,serialnumber,size', shell=True))
                 diskdrive = clear_info(diskdrive, "Drive: ")
 
                 # Вытаскиваем информацию по CPU
