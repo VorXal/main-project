@@ -2,7 +2,6 @@ import subprocess
 import uuid
 import platform
 import getpass
-import psutil
 import pyautogui as pg
 from geolocation import geolocation as gl
 
@@ -43,6 +42,10 @@ if __name__ == "__main__":
                 video = str(subprocess.check_output('wmic path win32_VideoController get name', shell=True))
                 video = clear_info(video, "Video: ")
 
+                # Вытаскиваем информацию по CPU
+                cpu = str(subprocess.check_output('wmic cpu get name', shell=True))
+                cpu = clear_info(cpu, "CPU: ")
+
                 # Вытаскиваем информацию по оперативной памяти
                 memory = str(subprocess.check_output('wmic MEMORYCHIP get BankLabel,DeviceLocator,Capacity,Speed',
                                                      shell=True))
@@ -52,18 +55,15 @@ if __name__ == "__main__":
                 diskdrive = str(subprocess.check_output('wmic diskdrive get model,name,serialnumber,size', shell=True))
                 diskdrive = clear_info(diskdrive, "Drive: ")
 
-                # Вытаскиваем информацию по CPU
-                cpu = "CPU: "+str(platform.processor())+"\n"+str(psutil.cpu_freq())+"\n"
-
                 # Инфо о пользователе компьютера
-                user = "ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ\nUser: "+str(getpass.getuser())+"\nВладелец ПК: "+user+"\n"
+                user = "\nИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ\nUser: "+str(getpass.getuser())+"\nВладелец ПК: "+user+"\n"
 
                 # Инфа о сетке, операционной системе и т.д.
                 network = "ОСТАЛЬНОЕ\n"+"IP: "+geo_info[0]+" \nLocation: "+geo_info[1]+"\nMAC-Address: "+get_mac()
                 os = "OS: "+str(platform.platform())+"\n______________________________________________________________"
 
                 # Собираем информацию в единую строку
-                str_out += motherboard+"\n"+video+"\n"+memory+"\n"+diskdrive+"\n"+cpu+"\n"+user+"\n"+network+"\n"+os
+                str_out += motherboard+"\n"+video+"\n"+cpu+"\n"+memory+"\n"+diskdrive+"\n"+"\n"+user+"\n"+network+"\n"+os
                 print(str_out)
                 inventory.write(str_out)
                 inventory.close()
