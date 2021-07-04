@@ -10,11 +10,6 @@ def geolocation(addr=''):
         url = 'https://ipinfo.io/' + addr + '/json'
     res = urlopen(url)
     data = load(res)
-    for attr in data.keys():
-        if attr == 'ip':
-            geolocation_info.append(data[attr])
-        elif attr == 'city':
-            geolocation_info.append(data[attr])
-        else:
-            break
+    geolocation_info.append(data['ip'])
+    geolocation_info.append(data['city'])
     return geolocation_info
