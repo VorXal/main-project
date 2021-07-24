@@ -4,7 +4,7 @@ from interaction import Interaction
 
 
 if __name__ == "__main__":
-    admin = User("Admin", "DeGenerate12Pas")
+    admin = User("Your Login", "Your Password")
     client = MongoClient(admin.get_connect())
     db = client.fincon
     spending = db.spending
